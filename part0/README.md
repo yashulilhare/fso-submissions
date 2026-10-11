@@ -8,11 +8,12 @@ sequenceDiagram
     participant server
 
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    Note right of browser: Clicking Save button triggers post request to send new note to the server
     activate server
     server->>browser: Status code 302 - URL redirect
     deactivate server
 
-    Note left of server: Server responds with status code 302 which is url redirect and asks browser to perform a new HTTP GET request to address defined in headers Location
+    Note left of server: Server saves the note and responds with status code 302 which is url redirect and asks browser to perform a new HTTP GET request to address defined in headers Location which will be /notes
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
@@ -42,4 +43,3 @@ sequenceDiagram
 
     Note right of browser: The browser executes the callback function that renders the notes
 ```
-
