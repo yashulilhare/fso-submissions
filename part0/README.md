@@ -1,6 +1,6 @@
 # Part 0: Fundamentals of how web application works Exercise submissions
 
-## Exercise 0.4: New Note Diagram - Solution
+## Exercise 0.4: New Note diagram - solution
 
 ```mermaid
 sequenceDiagram
@@ -43,7 +43,7 @@ sequenceDiagram
 
     Note right of browser: The browser executes the callback function that renders the notes
 ```
-## 0.5: Single Page App (SPA) - Solution
+## Exercise 0.5: Single Page App (SPA) diagram - solution
 
 ```mermaid
 sequenceDiagram
@@ -64,9 +64,26 @@ sequenceDiagram
     activate server
     server-->>browser: The Javascript file (spa.js)
     deactivate server
+    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
 
     browser->>server: https://studies.cs.helsinki.fi/exampleapp/data.json
     activate server
     server-->>browser: The Json Data: ex., [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
     deactivate server
+    Note right of browser: The browser takes JSON data and executes the callback function that renders the notes
+```
+
+## Exercise 0.6: New note in Single Page App diagram - solution
+
+```mermaid
+sequenceDiagram
+    participant browser
+    participant server
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    activate server
+    server-->>browser: Status code 201 (Created). Payload - JSON - Newly created note object
+    deactivate server
+    
+    Note right of browser: Status code 201 indicates the new note has been created. Browser executes the code to render newly created note at last of the list.
 ```
