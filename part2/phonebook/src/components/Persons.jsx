@@ -1,16 +1,12 @@
-const Person = ({ person }) => {
-  return (
-    <p>
-      {person.name} {person.number}
-    </p>
-  );
-};
+import Person from "./Person";
 
-const Persons = ({ persons }) => {
+const Persons = ({ persons, deletePerson }) => {
   return (
     <>
       {persons.map((person) => {
-        return <Person person={person} key={person.name} />;
+        return (
+          <Person person={person} key={person.id} deletePerson={deletePerson} />
+        );
       })}
     </>
   );

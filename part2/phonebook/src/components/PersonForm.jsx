@@ -1,28 +1,10 @@
-const PersonForm = ({
-  persons,
-  newName,
-  newNumber,
-  setPersons,
-  setNewName,
-  setNewNumber,
-}) => {
+const PersonForm = ({ newPerson, setNewPerson, addPerson }) => {
   const handleNameChange = (e) => {
-    e.preventDefault();
-    setNewName(e.target.value);
+    setNewPerson({ ...newPerson, name: e.target.value });
   };
 
   const handleNumberChange = (e) => {
-    e.preventDefault();
-    setNewNumber(String(e.target.value));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (persons.some((person) => person.name === newName)) {
-      alert(`${newName} is already added to phonebook`);
-      return;
-    }
-    setPersons(persons.concat({ name: newName, number: newNumber }));
+    setNewPerson({ ...newPerson, number: String(e.target.value) });
   };
 
   return (
@@ -32,7 +14,7 @@ const PersonForm = ({
         <input
           id="name"
           name="name"
-          value={newName}
+          value={newPerson.name}
           onChange={handleNameChange}
         />
       </div>
@@ -42,12 +24,12 @@ const PersonForm = ({
           type="tel"
           id="number"
           name="number"
-          value={newNumber}
+          value={newPerson.number}
           onChange={handleNumberChange}
         />
       </div>
       <div>
-        <button type="submit" onClick={handleSubmit}>
+        <button type="submit" onClick={addPerson}>
           add
         </button>
       </div>

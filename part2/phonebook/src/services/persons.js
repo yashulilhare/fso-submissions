@@ -24,5 +24,5 @@ export default {
   getAll,
   create,
   update,
-  remove,
+  delete: remove,
 };
