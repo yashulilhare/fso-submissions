@@ -1,5 +1,4 @@
 const CountryInformation = ({ country }) => {
-  console.log("country information rendered");
   return (
     <section>
       <h1>{country.name.common}</h1>

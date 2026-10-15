@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import SearchBar from "./components/SearchBar";
 import CountryList from "./components/CountryList";
 import CountryInformation from "./components/CountryInformation";
+import WeatherData from "./components/WeatherData";
 
 const App = () => {
-  console.log("app rendered");
   const [filter, setFilter] = useState("");
   const [countries, setCountries] = useState([]);
 
@@ -59,6 +59,7 @@ const App = () => {
       <SearchBar
         filter={filter}
         setFilter={setFilter}
+        countryToShow={countryToShow}
         setCountryToShow={setCountryToShow}
       />
 
@@ -68,6 +69,7 @@ const App = () => {
         <CountryList list={filteredList} setCountryToShow={setCountryToShow} />
       )}
       {countryObj && <CountryInformation country={countryObj} />}
+      {countryObj && <WeatherData city={countryObj.capital[0]} />}
     </div>
   );
 };

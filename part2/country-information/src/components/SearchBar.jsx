@@ -1,4 +1,4 @@
-const SearchBar = ({ filter, setFilter, setCountryToShow }) => {
+const SearchBar = ({ filter, setFilter, countryToShow, setCountryToShow }) => {
   return (
     <div>
       find countries:{" "}
@@ -7,7 +7,9 @@ const SearchBar = ({ filter, setFilter, setCountryToShow }) => {
         value={filter}
         onChange={(e) => {
           setFilter(e.target.value);
-          setCountryToShow(null);
+          if (countryToShow) {
+            setCountryToShow(null);
+          }
         }}
       />
     </div>
