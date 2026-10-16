@@ -12,6 +12,7 @@
   "license": "MIT",
   "description": "Submission for exercise in Part 2 - Phonebook Backend",
   "dependencies": {
-    "express": "^5.3.0"
+    "express": "^5.3.0",
+    "morgan": "^1.12.1"
   }
 }

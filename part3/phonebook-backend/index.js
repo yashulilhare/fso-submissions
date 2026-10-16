@@ -1,7 +1,25 @@
 const express = require("express");
+const morgan = require("morgan");
 
 const app = express();
 app.use(express.json());
+
+morgan.token("body", (req) => req.body);
+
+app.use(
+  morgan((tokens, req, res) => {
+    return [
+      tokens.method(req, res),
+      tokens.url(req, res),
+      tokens.status(req, res),
+      tokens.res(req, res, "content-length"),
+      "-",
+      tokens["response-time"](req, res),
+      "ms",
+      JSON.stringify(tokens.body(req, res)),
+    ].join(" ");
+  }),
+);
 
 const persons = [
   {
@@ -50,7 +68,7 @@ app.get("/api/persons/:id", (req, res) => {
   if (person) {
     res.json(person);
   } else {
-    res.status(404).send(`No person found with id ${req.params.id}`);
+    res.status(404).json({ error: `No person found with id ${req.params.id}` });
   }
 });
 
@@ -77,7 +95,6 @@ app.post("/api/persons", (req, res) => {
     return res.status(400).json({ error: "name must be unique" });
   }
   const id = generateId();
-  console.log(id);
   const newPerson = {
     name,
     number,
@@ -85,7 +102,7 @@ app.post("/api/persons", (req, res) => {
   };
   persons.push(newPerson);
 
-  res.json(newPerson);
+  res.status(201).json(newPerson);
 });
 
 app.delete("/api/persons/:id", (req, res) => {
